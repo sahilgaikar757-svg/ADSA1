@@ -1,0 +1,41 @@
+class DataItem {
+    int key;
+    int data;
+
+    DataItem(int key, int data) {
+        this.key = key;
+        this.data = data;
+    }
+}
+
+public class HashTable {
+    static final int SIZE = 10;
+    static DataItem[] hashArray = new DataItem[SIZE];
+
+    static int hashIndex(int key) {
+        return key % SIZE;
+    }
+
+    static void insert(int key, int data) {
+        DataItem item = new DataItem(key, data);
+        int index = hashIndex(key);
+
+        if (hashArray[index] == null) {
+            hashArray[index] = item;
+            System.out.println("The Data " + data +
+                    " is stored at Index " + index +
+                    " Having key " + key);
+        } else {
+            System.out.println("The Index " + index +
+                    " is Already Occupied by an item.");
+        }
+    }
+
+    public static void main(String[] args) {
+        insert(78, 981);
+        insert(45, 478);
+        insert(94, 45);
+        insert(53, 589);
+        insert(45, 845);
+    }
+}
