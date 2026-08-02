@@ -1,0 +1,77 @@
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node left, right;
+
+    Node(int data) {
+        this.data = data;
+        left = right = null;
+    }
+}
+
+public class BSTTraversal {
+
+    static Scanner sc = new Scanner(System.in);
+
+    // Insert Node
+    static Node insertNode() {
+        int data = sc.nextInt();
+
+        if (data == -1)
+            return null;
+
+        Node node = new Node(data);
+
+        node.left = insertNode();
+        node.right = insertNode();
+
+        return node;
+    }
+
+    // Preorder Traversal
+    static void preorder(Node node) {
+        if (node == null)
+            return;
+
+        System.out.print(node.data + " ");
+        preorder(node.left);
+        preorder(node.right);
+    }
+
+    // Inorder Traversal
+    static void inorder(Node node) {
+        if (node == null)
+            return;
+
+        inorder(node.left);
+        System.out.print(node.data + " ");
+        inorder(node.right);
+    }
+
+    // Postorder Traversal
+    static void postorder(Node node) {
+        if (node == null)
+            return;
+
+        postorder(node.left);
+        postorder(node.right);
+        System.out.print(node.data + " ");
+    }
+
+    public static void main(String[] args) {
+
+        System.out.println("Enter tree nodes (-1 for NULL):");
+
+        Node root = insertNode();
+
+        System.out.print("Preorder: ");
+        preorder(root);
+
+        System.out.print("\nInorder: ");
+        inorder(root);
+
+        System.out.print("\nPostorder: ");
+        postorder(root);
+    }
+}
