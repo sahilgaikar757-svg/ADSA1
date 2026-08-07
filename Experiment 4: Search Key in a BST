@@ -1,0 +1,53 @@
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node left, right;
+
+    Node(int data) {
+        this.data = data;
+        left = right = null;
+    }
+}
+
+public class BSTSearch {
+    static Scanner sc = new Scanner(System.in);
+
+    // Create Tree
+    static Node insertNode() {
+        int data = sc.nextInt();
+
+        if (data == -1)
+            return null;
+
+        Node node = new Node(data);
+        node.left = insertNode();
+        node.right = insertNode();
+
+        return node;
+    }
+
+    // Search Key
+    static boolean search(Node node, int key) {
+        if (node == null)
+            return false;
+
+        if (node.data == key)
+            return true;
+
+        return search(node.left, key) || search(node.right, key);
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Enter tree nodes (-1 for NULL):");
+        Node root = insertNode();
+
+        System.out.print("Enter key to search: ");
+        int key = sc.nextInt();
+
+        if (search(root, key))
+            System.out.println("Key Found");
+        else
+            System.out.println("Key Not Found");
+    }
+}
